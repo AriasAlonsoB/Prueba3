@@ -1,0 +1,1405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ViajaMasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="auto">
+          <Key>
+            <PropertyRef Name="id_auto" />
+          </Key>
+          <Property Name="id_auto" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="marca" Type="varchar" MaxLength="255" />
+          <Property Name="modelo" Type="varchar" MaxLength="255" />
+          <Property Name="placa" Type="varchar" MaxLength="255" />
+          <Property Name="anioCompra" Type="datetime2" Precision="0" />
+          <Property Name="color" Type="varchar" MaxLength="255" />
+          <Property Name="capacidad" Type="int" />
+          <Property Name="potencia" Type="varchar" MaxLength="255" />
+          <Property Name="tipoCombustible" Type="varchar" MaxLength="255" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="avion">
+          <Key>
+            <PropertyRef Name="id_avion" />
+          </Key>
+          <Property Name="id_avion" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="model" Type="varchar" MaxLength="255" />
+          <Property Name="aerolinea" Type="varchar" MaxLength="255" />
+          <Property Name="placa" Type="varchar" MaxLength="255" />
+          <Property Name="millas_recorridas" Type="int" />
+          <Property Name="anio_ensamble" Type="int" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="checkin">
+          <Key>
+            <PropertyRef Name="id_checkin" />
+          </Key>
+          <Property Name="id_checkin" Type="int" Nullable="false" />
+          <Property Name="id_reserva" Type="int" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="checkout">
+          <Key>
+            <PropertyRef Name="id_checkout" />
+          </Key>
+          <Property Name="id_checkout" Type="int" Nullable="false" />
+          <Property Name="id_checkin" Type="int" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="255" />
+          <Property Name="apellidos" Type="varchar" MaxLength="255" />
+          <Property Name="dni" Type="int" />
+          <Property Name="fecha_nacimiento" Type="datetime2" Precision="0" />
+          <Property Name="genero" Type="char" MaxLength="1" />
+          <Property Name="correo" Type="varchar" MaxLength="255" />
+          <Property Name="clave" Type="varchar" MaxLength="255" />
+          <Property Name="telefono" Type="int" />
+        </EntityType>
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="int" Nullable="false" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="estado" Type="varchar" MaxLength="255" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="id_servicio" Type="int" />
+        </EntityType>
+        <EntityType Name="cupon">
+          <Key>
+            <PropertyRef Name="id_cupon" />
+          </Key>
+          <Property Name="id_cupon" Type="int" Nullable="false" />
+          <Property Name="id_reserva" Type="int" />
+        </EntityType>
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="detReserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_reserva" Type="int" />
+          <Property Name="id_servicio" Type="int" />
+          <Property Name="id_cliente" Type="int" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="estado" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="devDevol">
+          <Key>
+            <PropertyRef Name="id_devDevol" />
+          </Key>
+          <Property Name="id_devDevol" Type="int" Nullable="false" />
+          <Property Name="id_reserva" Type="int" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="descripcion" Type="varchar" MaxLength="255" />
+          <Property Name="estado" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="255" />
+          <Property Name="ruc" Type="varchar" MaxLength="255" />
+          <Property Name="fecha_registro" Type="datetime2" Precision="0" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="rubro" Type="varchar" MaxLength="255" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="detalle" Type="varchar" MaxLength="255" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+          <Property Name="clave" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="habitacion">
+          <Key>
+            <PropertyRef Name="id_habitacion" />
+          </Key>
+          <Property Name="id_habitacion" Type="int" Nullable="false" />
+          <Property Name="id_hotel" Type="int" />
+          <Property Name="capacidad" Type="int" />
+          <Property Name="precio" Type="float" />
+          <Property Name="tipo_Habitacion" Type="varchar" MaxLength="255" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="id_hotel" />
+          </Key>
+          <Property Name="id_hotel" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="nombre_hotel" Type="varchar" MaxLength="255" />
+          <Property Name="num_estrellas" Type="int" />
+          <Property Name="direccion" Type="varchar" MaxLength="255" />
+          <Property Name="num_cuartos" Type="int" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="id_pago" />
+          </Key>
+          <Property Name="id_pago" Type="int" Nullable="false" />
+          <Property Name="monto" Type="int" />
+          <Property Name="metodo" Type="int" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="id_reserva" />
+          </Key>
+          <Property Name="id_reserva" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" />
+          <Property Name="id_pago" Type="int" />
+          <Property Name="fecha" Type="datetime2" Precision="0" />
+          <Property Name="estado" Type="int" />
+        </EntityType>
+        <EntityType Name="seguro">
+          <Key>
+            <PropertyRef Name="id_seguro" />
+          </Key>
+          <Property Name="id_seguro" Type="int" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="condiciones" Type="varchar" MaxLength="255" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="servicio">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="int" Nullable="false" />
+          <Property Name="id_habitacion" Type="int" />
+          <Property Name="id_vuelo" Type="int" />
+          <Property Name="id_auto" Type="int" />
+          <Property Name="id_seguro" Type="int" />
+          <Property Name="fecha" Type="datetime2" Precision="0" />
+          <Property Name="descuento" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="activo" Type="int" />
+        </EntityType>
+        <EntityType Name="vuelo">
+          <Key>
+            <PropertyRef Name="id_vuelo" />
+          </Key>
+          <Property Name="id_vuelo" Type="int" Nullable="false" />
+          <Property Name="id_departamento_origen" Type="int" />
+          <Property Name="id_departamento_destino" Type="int" />
+          <Property Name="id_avion" Type="int" />
+          <Property Name="fecha_inicio" Type="datetime2" Precision="0" />
+          <Property Name="fecha_fin" Type="datetime2" Precision="0" />
+          <Property Name="hora" Type="datetime2" Precision="0" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+          <Property Name="capacidad" Type="int" />
+        </EntityType>
+        <Association Name="FK__auto__id_empresa__5812160E">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="auto" Type="Self.auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="auto">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__avion__id_empres__59063A47">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="avion" Type="Self.avion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="avion">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkin__id_rese__59FA5E80">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="checkin" Type="Self.checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="checkin">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkout__id_che__5AEE82B9">
+          <End Role="checkin" Type="Self.checkin" Multiplicity="0..1" />
+          <End Role="checkout" Type="Self.checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="checkin">
+              <PropertyRef Name="id_checkin" />
+            </Principal>
+            <Dependent Role="checkout">
+              <PropertyRef Name="id_checkin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comentari__id_se__5BE2A6F2">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="0..1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cupon__id_reserv__5CD6CB2B">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="cupon" Type="Self.cupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="cupon">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__detReserv__id_re__5DCAEF64">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="detReserva" Type="Self.detReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="detReserva">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__detReserv__id_se__5EBF139D">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="0..1" />
+          <End Role="detReserva" Type="Self.detReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="detReserva">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__devDevol__id_res__5FB337D6">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="devDevol" Type="Self.devDevol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="devDevol">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__habitacio__id_ho__60A75C0F">
+          <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+          <End Role="habitacion" Type="Self.habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel">
+              <PropertyRef Name="id_hotel" />
+            </Principal>
+            <Dependent Role="habitacion">
+              <PropertyRef Name="id_hotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hotel__id_empres__619B8048">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="hotel">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__id_clie__628FA481">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__id_pago__6383C8BA">
+          <End Role="pago" Type="Self.pago" Multiplicity="0..1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pago">
+              <PropertyRef Name="id_pago" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__seguro__id_empre__6477ECF3">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="seguro" Type="Self.seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="seguro">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_aut__656C112C">
+          <End Role="auto" Type="Self.auto" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auto">
+              <PropertyRef Name="id_auto" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_auto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_hab__66603565">
+          <End Role="habitacion" Type="Self.habitacion" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="habitacion">
+              <PropertyRef Name="id_habitacion" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_habitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_seg__6754599E">
+          <End Role="seguro" Type="Self.seguro" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seguro">
+              <PropertyRef Name="id_seguro" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_seguro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_vue__68487DD7">
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vuelo">
+              <PropertyRef Name="id_vuelo" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_avion__693CA210">
+          <End Role="avion" Type="Self.avion" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="avion">
+              <PropertyRef Name="id_avion" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_avion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_depart__6A30C649">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_departamento_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_depart__6B24EA82">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_departamento_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ViajaMasModelStoreContainer">
+          <EntitySet Name="auto" EntityType="Self.auto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="avion" EntityType="Self.avion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="checkin" EntityType="Self.checkin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="checkout" EntityType="Self.checkout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comentario" EntityType="Self.comentario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cupon" EntityType="Self.cupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departamento" EntityType="Self.departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detReserva" EntityType="Self.detReserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="devDevol" EntityType="Self.devDevol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empresa" EntityType="Self.empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="habitacion" EntityType="Self.habitacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pago" EntityType="Self.pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="seguro" EntityType="Self.seguro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servicio" EntityType="Self.servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vuelo" EntityType="Self.vuelo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__auto__id_empresa__5812160E" Association="Self.FK__auto__id_empresa__5812160E">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="auto" EntitySet="auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__avion__id_empres__59063A47" Association="Self.FK__avion__id_empres__59063A47">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="avion" EntitySet="avion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkin__id_rese__59FA5E80" Association="Self.FK__checkin__id_rese__59FA5E80">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="checkin" EntitySet="checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkout__id_che__5AEE82B9" Association="Self.FK__checkout__id_che__5AEE82B9">
+            <End Role="checkin" EntitySet="checkin" />
+            <End Role="checkout" EntitySet="checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comentari__id_se__5BE2A6F2" Association="Self.FK__comentari__id_se__5BE2A6F2">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cupon__id_reserv__5CD6CB2B" Association="Self.FK__cupon__id_reserv__5CD6CB2B">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="cupon" EntitySet="cupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__detReserv__id_re__5DCAEF64" Association="Self.FK__detReserv__id_re__5DCAEF64">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="detReserva" EntitySet="detReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__detReserv__id_se__5EBF139D" Association="Self.FK__detReserv__id_se__5EBF139D">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="detReserva" EntitySet="detReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__devDevol__id_res__5FB337D6" Association="Self.FK__devDevol__id_res__5FB337D6">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="devDevol" EntitySet="devDevol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__habitacio__id_ho__60A75C0F" Association="Self.FK__habitacio__id_ho__60A75C0F">
+            <End Role="hotel" EntitySet="hotel" />
+            <End Role="habitacion" EntitySet="habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hotel__id_empres__619B8048" Association="Self.FK__hotel__id_empres__619B8048">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="hotel" EntitySet="hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__id_clie__628FA481" Association="Self.FK__reserva__id_clie__628FA481">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__id_pago__6383C8BA" Association="Self.FK__reserva__id_pago__6383C8BA">
+            <End Role="pago" EntitySet="pago" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__seguro__id_empre__6477ECF3" Association="Self.FK__seguro__id_empre__6477ECF3">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="seguro" EntitySet="seguro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_aut__656C112C" Association="Self.FK__servicio__id_aut__656C112C">
+            <End Role="auto" EntitySet="auto" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_hab__66603565" Association="Self.FK__servicio__id_hab__66603565">
+            <End Role="habitacion" EntitySet="habitacion" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_seg__6754599E" Association="Self.FK__servicio__id_seg__6754599E">
+            <End Role="seguro" EntitySet="seguro" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_vue__68487DD7" Association="Self.FK__servicio__id_vue__68487DD7">
+            <End Role="vuelo" EntitySet="vuelo" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_avion__693CA210" Association="Self.FK__vuelo__id_avion__693CA210">
+            <End Role="avion" EntitySet="avion" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_depart__6A30C649" Association="Self.FK__vuelo__id_depart__6A30C649">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_depart__6B24EA82" Association="Self.FK__vuelo__id_depart__6B24EA82">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ViajaMasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="auto">
+          <Key>
+            <PropertyRef Name="id_auto" />
+          </Key>
+          <Property Name="id_auto" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="marca" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="placa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="anioCompra" Type="DateTime" Precision="0" />
+          <Property Name="color" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="capacidad" Type="Int32" />
+          <Property Name="potencia" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="tipoCombustible" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK__auto__id_empresa__5812160E" FromRole="auto" ToRole="empresa" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__servicio__id_aut__656C112C" FromRole="auto" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="avion">
+          <Key>
+            <PropertyRef Name="id_avion" />
+          </Key>
+          <Property Name="id_avion" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="model" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="aerolinea" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="placa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="millas_recorridas" Type="Int32" />
+          <Property Name="anio_ensamble" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK__avion__id_empres__59063A47" FromRole="avion" ToRole="empresa" />
+          <NavigationProperty Name="vuelo" Relationship="Self.FK__vuelo__id_avion__693CA210" FromRole="avion" ToRole="vuelo" />
+        </EntityType>
+        <EntityType Name="checkin">
+          <Key>
+            <PropertyRef Name="id_checkin" />
+          </Key>
+          <Property Name="id_checkin" Type="Int32" Nullable="false" />
+          <Property Name="id_reserva" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__checkin__id_rese__59FA5E80" FromRole="checkin" ToRole="reserva" />
+          <NavigationProperty Name="checkout" Relationship="Self.FK__checkout__id_che__5AEE82B9" FromRole="checkin" ToRole="checkout" />
+        </EntityType>
+        <EntityType Name="checkout">
+          <Key>
+            <PropertyRef Name="id_checkout" />
+          </Key>
+          <Property Name="id_checkout" Type="Int32" Nullable="false" />
+          <Property Name="id_checkin" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="checkin" Relationship="Self.FK__checkout__id_che__5AEE82B9" FromRole="checkout" ToRole="checkin" />
+        </EntityType>
+        <EntityType Name="cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="dni" Type="Int32" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__id_clie__628FA481" FromRole="cliente" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="Int32" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id_servicio" Type="Int32" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__comentari__id_se__5BE2A6F2" FromRole="comentario" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="cupon">
+          <Key>
+            <PropertyRef Name="id_cupon" />
+          </Key>
+          <Property Name="id_cupon" Type="Int32" Nullable="false" />
+          <Property Name="id_reserva" Type="Int32" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__cupon__id_reserv__5CD6CB2B" FromRole="cupon" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="vuelo" Relationship="Self.FK__vuelo__id_depart__6A30C649" FromRole="departamento" ToRole="vuelo" />
+          <NavigationProperty Name="vuelo1" Relationship="Self.FK__vuelo__id_depart__6B24EA82" FromRole="departamento" ToRole="vuelo" />
+        </EntityType>
+        <EntityType Name="detReserva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id_reserva" Type="Int32" />
+          <Property Name="id_servicio" Type="Int32" />
+          <Property Name="id_cliente" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__detReserv__id_re__5DCAEF64" FromRole="detReserva" ToRole="reserva" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__detReserv__id_se__5EBF139D" FromRole="detReserva" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="devDevol">
+          <Key>
+            <PropertyRef Name="id_devDevol" />
+          </Key>
+          <Property Name="id_devDevol" Type="Int32" Nullable="false" />
+          <Property Name="id_reserva" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__devDevol__id_res__5FB337D6" FromRole="devDevol" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ruc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="0" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rubro" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="detalle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="auto" Relationship="Self.FK__auto__id_empresa__5812160E" FromRole="empresa" ToRole="auto" />
+          <NavigationProperty Name="avion" Relationship="Self.FK__avion__id_empres__59063A47" FromRole="empresa" ToRole="avion" />
+          <NavigationProperty Name="hotel" Relationship="Self.FK__hotel__id_empres__619B8048" FromRole="empresa" ToRole="hotel" />
+          <NavigationProperty Name="seguro" Relationship="Self.FK__seguro__id_empre__6477ECF3" FromRole="empresa" ToRole="seguro" />
+        </EntityType>
+        <EntityType Name="habitacion">
+          <Key>
+            <PropertyRef Name="id_habitacion" />
+          </Key>
+          <Property Name="id_habitacion" Type="Int32" Nullable="false" />
+          <Property Name="id_hotel" Type="Int32" />
+          <Property Name="capacidad" Type="Int32" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="tipo_Habitacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="hotel" Relationship="Self.FK__habitacio__id_ho__60A75C0F" FromRole="habitacion" ToRole="hotel" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__servicio__id_hab__66603565" FromRole="habitacion" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="id_hotel" />
+          </Key>
+          <Property Name="id_hotel" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="nombre_hotel" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="num_estrellas" Type="Int32" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="num_cuartos" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK__hotel__id_empres__619B8048" FromRole="hotel" ToRole="empresa" />
+          <NavigationProperty Name="habitacion" Relationship="Self.FK__habitacio__id_ho__60A75C0F" FromRole="hotel" ToRole="habitacion" />
+        </EntityType>
+        <EntityType Name="pago">
+          <Key>
+            <PropertyRef Name="id_pago" />
+          </Key>
+          <Property Name="id_pago" Type="Int32" Nullable="false" />
+          <Property Name="monto" Type="Int32" />
+          <Property Name="metodo" Type="Int32" />
+          <NavigationProperty Name="reserva" Relationship="Self.FK__reserva__id_pago__6383C8BA" FromRole="pago" ToRole="reserva" />
+        </EntityType>
+        <EntityType Name="reserva">
+          <Key>
+            <PropertyRef Name="id_reserva" />
+          </Key>
+          <Property Name="id_reserva" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" />
+          <Property Name="id_pago" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="estado" Type="Int32" />
+          <NavigationProperty Name="checkin" Relationship="Self.FK__checkin__id_rese__59FA5E80" FromRole="reserva" ToRole="checkin" />
+          <NavigationProperty Name="cliente" Relationship="Self.FK__reserva__id_clie__628FA481" FromRole="reserva" ToRole="cliente" />
+          <NavigationProperty Name="cupon" Relationship="Self.FK__cupon__id_reserv__5CD6CB2B" FromRole="reserva" ToRole="cupon" />
+          <NavigationProperty Name="detReserva" Relationship="Self.FK__detReserv__id_re__5DCAEF64" FromRole="reserva" ToRole="detReserva" />
+          <NavigationProperty Name="devDevol" Relationship="Self.FK__devDevol__id_res__5FB337D6" FromRole="reserva" ToRole="devDevol" />
+          <NavigationProperty Name="pago" Relationship="Self.FK__reserva__id_pago__6383C8BA" FromRole="reserva" ToRole="pago" />
+        </EntityType>
+        <EntityType Name="seguro">
+          <Key>
+            <PropertyRef Name="id_seguro" />
+          </Key>
+          <Property Name="id_seguro" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="condiciones" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK__seguro__id_empre__6477ECF3" FromRole="seguro" ToRole="empresa" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__servicio__id_seg__6754599E" FromRole="seguro" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="servicio">
+          <Key>
+            <PropertyRef Name="id_servicio" />
+          </Key>
+          <Property Name="id_servicio" Type="Int32" Nullable="false" />
+          <Property Name="id_habitacion" Type="Int32" />
+          <Property Name="id_vuelo" Type="Int32" />
+          <Property Name="id_auto" Type="Int32" />
+          <Property Name="id_seguro" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="descuento" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="activo" Type="Int32" />
+          <NavigationProperty Name="auto" Relationship="Self.FK__servicio__id_aut__656C112C" FromRole="servicio" ToRole="auto" />
+          <NavigationProperty Name="comentario" Relationship="Self.FK__comentari__id_se__5BE2A6F2" FromRole="servicio" ToRole="comentario" />
+          <NavigationProperty Name="detReserva" Relationship="Self.FK__detReserv__id_se__5EBF139D" FromRole="servicio" ToRole="detReserva" />
+          <NavigationProperty Name="habitacion" Relationship="Self.FK__servicio__id_hab__66603565" FromRole="servicio" ToRole="habitacion" />
+          <NavigationProperty Name="seguro" Relationship="Self.FK__servicio__id_seg__6754599E" FromRole="servicio" ToRole="seguro" />
+          <NavigationProperty Name="vuelo" Relationship="Self.FK__servicio__id_vue__68487DD7" FromRole="servicio" ToRole="vuelo" />
+        </EntityType>
+        <EntityType Name="vuelo">
+          <Key>
+            <PropertyRef Name="id_vuelo" />
+          </Key>
+          <Property Name="id_vuelo" Type="Int32" Nullable="false" />
+          <Property Name="id_departamento_origen" Type="Int32" />
+          <Property Name="id_departamento_destino" Type="Int32" />
+          <Property Name="id_avion" Type="Int32" />
+          <Property Name="fecha_inicio" Type="DateTime" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Precision="0" />
+          <Property Name="hora" Type="DateTime" Precision="0" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="capacidad" Type="Int32" />
+          <NavigationProperty Name="avion" Relationship="Self.FK__vuelo__id_avion__693CA210" FromRole="vuelo" ToRole="avion" />
+          <NavigationProperty Name="departamento" Relationship="Self.FK__vuelo__id_depart__6A30C649" FromRole="vuelo" ToRole="departamento" />
+          <NavigationProperty Name="departamento1" Relationship="Self.FK__vuelo__id_depart__6B24EA82" FromRole="vuelo" ToRole="departamento" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__servicio__id_vue__68487DD7" FromRole="vuelo" ToRole="servicio" />
+        </EntityType>
+        <Association Name="FK__auto__id_empresa__5812160E">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="auto" Type="Self.auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="auto">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_aut__656C112C">
+          <End Role="auto" Type="Self.auto" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="auto">
+              <PropertyRef Name="id_auto" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_auto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__avion__id_empres__59063A47">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="avion" Type="Self.avion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="avion">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_avion__693CA210">
+          <End Role="avion" Type="Self.avion" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="avion">
+              <PropertyRef Name="id_avion" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_avion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkin__id_rese__59FA5E80">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="checkin" Type="Self.checkin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="checkin">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__checkout__id_che__5AEE82B9">
+          <End Role="checkin" Type="Self.checkin" Multiplicity="0..1" />
+          <End Role="checkout" Type="Self.checkout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="checkin">
+              <PropertyRef Name="id_checkin" />
+            </Principal>
+            <Dependent Role="checkout">
+              <PropertyRef Name="id_checkin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__id_clie__628FA481">
+          <End Role="cliente" Type="Self.cliente" Multiplicity="0..1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comentari__id_se__5BE2A6F2">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="0..1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cupon__id_reserv__5CD6CB2B">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="cupon" Type="Self.cupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="cupon">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_depart__6A30C649">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_departamento_origen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vuelo__id_depart__6B24EA82">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="vuelo">
+              <PropertyRef Name="id_departamento_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__detReserv__id_re__5DCAEF64">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="detReserva" Type="Self.detReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="detReserva">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__detReserv__id_se__5EBF139D">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="0..1" />
+          <End Role="detReserva" Type="Self.detReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id_servicio" />
+            </Principal>
+            <Dependent Role="detReserva">
+              <PropertyRef Name="id_servicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__devDevol__id_res__5FB337D6">
+          <End Role="reserva" Type="Self.reserva" Multiplicity="0..1" />
+          <End Role="devDevol" Type="Self.devDevol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reserva">
+              <PropertyRef Name="id_reserva" />
+            </Principal>
+            <Dependent Role="devDevol">
+              <PropertyRef Name="id_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__hotel__id_empres__619B8048">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="hotel">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__seguro__id_empre__6477ECF3">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="0..1" />
+          <End Role="seguro" Type="Self.seguro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="seguro">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__habitacio__id_ho__60A75C0F">
+          <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+          <End Role="habitacion" Type="Self.habitacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotel">
+              <PropertyRef Name="id_hotel" />
+            </Principal>
+            <Dependent Role="habitacion">
+              <PropertyRef Name="id_hotel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_hab__66603565">
+          <End Role="habitacion" Type="Self.habitacion" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="habitacion">
+              <PropertyRef Name="id_habitacion" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_habitacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__reserva__id_pago__6383C8BA">
+          <End Role="pago" Type="Self.pago" Multiplicity="0..1" />
+          <End Role="reserva" Type="Self.reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pago">
+              <PropertyRef Name="id_pago" />
+            </Principal>
+            <Dependent Role="reserva">
+              <PropertyRef Name="id_pago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_seg__6754599E">
+          <End Role="seguro" Type="Self.seguro" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="seguro">
+              <PropertyRef Name="id_seguro" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_seguro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__id_vue__68487DD7">
+          <End Role="vuelo" Type="Self.vuelo" Multiplicity="0..1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vuelo">
+              <PropertyRef Name="id_vuelo" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="id_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ViajaMasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="auto" EntityType="Self.auto" />
+          <EntitySet Name="avion" EntityType="Self.avion" />
+          <EntitySet Name="checkin" EntityType="Self.checkin" />
+          <EntitySet Name="checkout" EntityType="Self.checkout" />
+          <EntitySet Name="cliente" EntityType="Self.cliente" />
+          <EntitySet Name="comentario" EntityType="Self.comentario" />
+          <EntitySet Name="cupon" EntityType="Self.cupon" />
+          <EntitySet Name="departamento" EntityType="Self.departamento" />
+          <EntitySet Name="detReserva" EntityType="Self.detReserva" />
+          <EntitySet Name="devDevol" EntityType="Self.devDevol" />
+          <EntitySet Name="empresa" EntityType="Self.empresa" />
+          <EntitySet Name="habitacion" EntityType="Self.habitacion" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" />
+          <EntitySet Name="pago" EntityType="Self.pago" />
+          <EntitySet Name="reserva" EntityType="Self.reserva" />
+          <EntitySet Name="seguro" EntityType="Self.seguro" />
+          <EntitySet Name="servicio" EntityType="Self.servicio" />
+          <EntitySet Name="vuelo" EntityType="Self.vuelo" />
+          <AssociationSet Name="FK__auto__id_empresa__5812160E" Association="Self.FK__auto__id_empresa__5812160E">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="auto" EntitySet="auto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_aut__656C112C" Association="Self.FK__servicio__id_aut__656C112C">
+            <End Role="auto" EntitySet="auto" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__avion__id_empres__59063A47" Association="Self.FK__avion__id_empres__59063A47">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="avion" EntitySet="avion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_avion__693CA210" Association="Self.FK__vuelo__id_avion__693CA210">
+            <End Role="avion" EntitySet="avion" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkin__id_rese__59FA5E80" Association="Self.FK__checkin__id_rese__59FA5E80">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="checkin" EntitySet="checkin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__checkout__id_che__5AEE82B9" Association="Self.FK__checkout__id_che__5AEE82B9">
+            <End Role="checkin" EntitySet="checkin" />
+            <End Role="checkout" EntitySet="checkout" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__id_clie__628FA481" Association="Self.FK__reserva__id_clie__628FA481">
+            <End Role="cliente" EntitySet="cliente" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comentari__id_se__5BE2A6F2" Association="Self.FK__comentari__id_se__5BE2A6F2">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cupon__id_reserv__5CD6CB2B" Association="Self.FK__cupon__id_reserv__5CD6CB2B">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="cupon" EntitySet="cupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_depart__6A30C649" Association="Self.FK__vuelo__id_depart__6A30C649">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vuelo__id_depart__6B24EA82" Association="Self.FK__vuelo__id_depart__6B24EA82">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="vuelo" EntitySet="vuelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__detReserv__id_re__5DCAEF64" Association="Self.FK__detReserv__id_re__5DCAEF64">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="detReserva" EntitySet="detReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__detReserv__id_se__5EBF139D" Association="Self.FK__detReserv__id_se__5EBF139D">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="detReserva" EntitySet="detReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__devDevol__id_res__5FB337D6" Association="Self.FK__devDevol__id_res__5FB337D6">
+            <End Role="reserva" EntitySet="reserva" />
+            <End Role="devDevol" EntitySet="devDevol" />
+          </AssociationSet>
+          <AssociationSet Name="FK__hotel__id_empres__619B8048" Association="Self.FK__hotel__id_empres__619B8048">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="hotel" EntitySet="hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK__seguro__id_empre__6477ECF3" Association="Self.FK__seguro__id_empre__6477ECF3">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="seguro" EntitySet="seguro" />
+          </AssociationSet>
+          <AssociationSet Name="FK__habitacio__id_ho__60A75C0F" Association="Self.FK__habitacio__id_ho__60A75C0F">
+            <End Role="hotel" EntitySet="hotel" />
+            <End Role="habitacion" EntitySet="habitacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_hab__66603565" Association="Self.FK__servicio__id_hab__66603565">
+            <End Role="habitacion" EntitySet="habitacion" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__reserva__id_pago__6383C8BA" Association="Self.FK__reserva__id_pago__6383C8BA">
+            <End Role="pago" EntitySet="pago" />
+            <End Role="reserva" EntitySet="reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_seg__6754599E" Association="Self.FK__servicio__id_seg__6754599E">
+            <End Role="seguro" EntitySet="seguro" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__id_vue__68487DD7" Association="Self.FK__servicio__id_vue__68487DD7">
+            <End Role="vuelo" EntitySet="vuelo" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ViajaMasModelStoreContainer" CdmEntityContainer="ViajaMasEntities">
+          <EntitySetMapping Name="auto">
+            <EntityTypeMapping TypeName="ViajaMasModel.auto">
+              <MappingFragment StoreEntitySet="auto">
+                <ScalarProperty Name="id_auto" ColumnName="id_auto" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="anioCompra" ColumnName="anioCompra" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="potencia" ColumnName="potencia" />
+                <ScalarProperty Name="tipoCombustible" ColumnName="tipoCombustible" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="avion">
+            <EntityTypeMapping TypeName="ViajaMasModel.avion">
+              <MappingFragment StoreEntitySet="avion">
+                <ScalarProperty Name="id_avion" ColumnName="id_avion" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="aerolinea" ColumnName="aerolinea" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="millas_recorridas" ColumnName="millas_recorridas" />
+                <ScalarProperty Name="anio_ensamble" ColumnName="anio_ensamble" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="checkin">
+            <EntityTypeMapping TypeName="ViajaMasModel.checkin">
+              <MappingFragment StoreEntitySet="checkin">
+                <ScalarProperty Name="id_checkin" ColumnName="id_checkin" />
+                <ScalarProperty Name="id_reserva" ColumnName="id_reserva" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="checkout">
+            <EntityTypeMapping TypeName="ViajaMasModel.checkout">
+              <MappingFragment StoreEntitySet="checkout">
+                <ScalarProperty Name="id_checkout" ColumnName="id_checkout" />
+                <ScalarProperty Name="id_checkin" ColumnName="id_checkin" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cliente">
+            <EntityTypeMapping TypeName="ViajaMasModel.cliente">
+              <MappingFragment StoreEntitySet="cliente">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comentario">
+            <EntityTypeMapping TypeName="ViajaMasModel.comentario">
+              <MappingFragment StoreEntitySet="comentario">
+                <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cupon">
+            <EntityTypeMapping TypeName="ViajaMasModel.cupon">
+              <MappingFragment StoreEntitySet="cupon">
+                <ScalarProperty Name="id_cupon" ColumnName="id_cupon" />
+                <ScalarProperty Name="id_reserva" ColumnName="id_reserva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departamento">
+            <EntityTypeMapping TypeName="ViajaMasModel.departamento">
+              <MappingFragment StoreEntitySet="departamento">
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="detReserva">
+            <EntityTypeMapping TypeName="ViajaMasModel.detReserva">
+              <MappingFragment StoreEntitySet="detReserva">
+                <ScalarProperty Name="id_reserva" ColumnName="id_reserva" />
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="devDevol">
+            <EntityTypeMapping TypeName="ViajaMasModel.devDevol">
+              <MappingFragment StoreEntitySet="devDevol">
+                <ScalarProperty Name="id_devDevol" ColumnName="id_devDevol" />
+                <ScalarProperty Name="id_reserva" ColumnName="id_reserva" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresa">
+            <EntityTypeMapping TypeName="ViajaMasModel.empresa">
+              <MappingFragment StoreEntitySet="empresa">
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ruc" ColumnName="ruc" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="rubro" ColumnName="rubro" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="detalle" ColumnName="detalle" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="habitacion">
+            <EntityTypeMapping TypeName="ViajaMasModel.habitacion">
+              <MappingFragment StoreEntitySet="habitacion">
+                <ScalarProperty Name="id_habitacion" ColumnName="id_habitacion" />
+                <ScalarProperty Name="id_hotel" ColumnName="id_hotel" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tipo_Habitacion" ColumnName="tipo_Habitacion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotel">
+            <EntityTypeMapping TypeName="ViajaMasModel.hotel">
+              <MappingFragment StoreEntitySet="hotel">
+                <ScalarProperty Name="id_hotel" ColumnName="id_hotel" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="nombre_hotel" ColumnName="nombre_hotel" />
+                <ScalarProperty Name="num_estrellas" ColumnName="num_estrellas" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="num_cuartos" ColumnName="num_cuartos" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pago">
+            <EntityTypeMapping TypeName="ViajaMasModel.pago">
+              <MappingFragment StoreEntitySet="pago">
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="metodo" ColumnName="metodo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reserva">
+            <EntityTypeMapping TypeName="ViajaMasModel.reserva">
+              <MappingFragment StoreEntitySet="reserva">
+                <ScalarProperty Name="id_reserva" ColumnName="id_reserva" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_pago" ColumnName="id_pago" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seguro">
+            <EntityTypeMapping TypeName="ViajaMasModel.seguro">
+              <MappingFragment StoreEntitySet="seguro">
+                <ScalarProperty Name="id_seguro" ColumnName="id_seguro" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="condiciones" ColumnName="condiciones" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicio">
+            <EntityTypeMapping TypeName="ViajaMasModel.servicio">
+              <MappingFragment StoreEntitySet="servicio">
+                <ScalarProperty Name="id_servicio" ColumnName="id_servicio" />
+                <ScalarProperty Name="id_habitacion" ColumnName="id_habitacion" />
+                <ScalarProperty Name="id_vuelo" ColumnName="id_vuelo" />
+                <ScalarProperty Name="id_auto" ColumnName="id_auto" />
+                <ScalarProperty Name="id_seguro" ColumnName="id_seguro" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vuelo">
+            <EntityTypeMapping TypeName="ViajaMasModel.vuelo">
+              <MappingFragment StoreEntitySet="vuelo">
+                <ScalarProperty Name="id_vuelo" ColumnName="id_vuelo" />
+                <ScalarProperty Name="id_departamento_origen" ColumnName="id_departamento_origen" />
+                <ScalarProperty Name="id_departamento_destino" ColumnName="id_departamento_destino" />
+                <ScalarProperty Name="id_avion" ColumnName="id_avion" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="capacidad" ColumnName="capacidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

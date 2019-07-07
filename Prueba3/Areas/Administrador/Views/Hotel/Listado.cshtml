@@ -1,0 +1,40 @@
+﻿@using BEViajaMas;
+@{
+    List<hotel> listadoHotel = (List<hotel>)ViewBag.ListadoHotel;
+}
+
+<table id="tbHotel" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Código Empresa</th>
+            <th>Nombre</th>
+            <th>Número de Estrellas</th>
+            <th>Dirección</th>
+            <th>Número de Cuartos</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (hotel item in listadoHotel)
+        {
+            <tr>
+                <td>@item.id_hotel</td>
+                <td>@item.id_empresa</td>
+                <td>@item.nombre_hotel</td>
+                <td>@item.num_estrellas</td>
+                <td>@item.direccion</td>
+                <td>@item.num_cuartos</td>
+                <td>@item.estado</td>
+                <!--<td>
+                    <input type="button" id="btnEliminarEmpresa" data-codigo="@item.id_empresa"
+                           class="btnEliminarEmpresa btn btn-danger" value="Eliminar" />
+                    <input type="button" id="btnEditarEmpresa" data-codigo="@item.id_empresa"
+                           class="btnEditarEmpresa btn btn-info" value="Editar" />
+                </td>-->
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="alert alert-primary" role="alert">
+    <strong> Registro de Paquetes </strong>
+</div>
+
+<hr />
+<input type="button" value="Registrar Paquete" class="btn btn-lg btn-primary" id="btnAgregarPaquete" name="btnAgregarPaquete" />
+<br />
+<br />
+<br />
+
+<input type="hidden" id="hidId_Servicio" value="-1" />
+<!-- Modal -->
+<div class="modal fade" id="modalNuevoRegistroPaquete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo">Registro de Hotel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Habitacion</label>
+                    <input type="text" class="form-control" id="txtHabitacion" placeholder="Ingrese numero de habitacion">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 303</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Vuelo</label>
+                    <input type="text" class="form-control" id="txtVuelo" placeholder="Ingrese vuelo">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: New York 305</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Auto</label>
+                    <input type="text" class="form-control" id="txtAuto" placeholder="Ingrese numero de placa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: AEA-M4N</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Seguro</label>
+                    <input type="text" class="form-control" id="txtSeguro" placeholder="Ingrese seguro">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 101</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha</label>
+                    <input type="text" class="form-control" id="txtFechaRegistro" placeholder="Fecha de Registro">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 10/10/10</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Descuento</label>
+                    <input type="text" class="form-control" id="txtDescuento">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Estado</label>
+                    <input type="text" class="form-control" id="txtEstado">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Activo</label>
+                    <input type="text" class="form-control" id="txtActivo">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnGrabarNuevoHotel">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnAgregarPaquete").click(function () {
+        $("#txtHabitacion").val("");
+        $("#txtVuelo").val("");
+        $("#txtAuto").val("");
+        $("#txtSeguro").val("");
+        $("#txtFecha").val("");
+        $("#txtDescuento").val("");
+        $("#txtEstado").val("");
+        $("#txtActivo").val("");
+        $("#hidId_Servicio").val(-1);
+        $("#modalNuevoRegistroPaquete").modal();
+    });
+    //********************************GRABAR***********************************************
+    $("#btnGrabarNuevoHotel").click(function () {
+        //Se obtiene los valores del formulario
+        var vCodServicio = $("#hidId_Servicio").val();
+        var vIdHabitacion = $("#txtHabitacion").val();
+        var vIdVuelo = $("#txtVuelo").val();
+        var vIdAuto = $("#txtAuto").val();
+        var vIdSeguro = $("#txtSeguro").val();
+        var vFecha = $("#txtFecha").val();
+        var vDescuento = $("#textDescuento").val();
+        var vEstado = $("#txtEstado").val();
+        var vActivo = $("#txtActivo").val();
+
+        $.ajax({
+            type: "POST",
+            url: URL_PAGE + "Administrador/Hotel/Grabar",
+            cache: false,
+            data: {
+                id_servicio: vCodServicio,
+                id_habitacion: vIdHabitacion,
+                id_vuelo: vIdVuelo,
+                id_auto : vIdAuto,
+                id_seguro : vIdSeguro,
+                fecha: vFecha,
+                descuento: vDescuento,
+                estado: vEstado,
+                activo : vActivo,
+
+            },
+            success: function (data) {
+                if (data.success) {
+                    alert("Se registro exitosamente");
+                    $("#hidId_Servicio").val(-1);
+
+                } else {
+                   alert("Ocurrió un error en el registro");
+                }
+            }
+        });
+    });
+</script>

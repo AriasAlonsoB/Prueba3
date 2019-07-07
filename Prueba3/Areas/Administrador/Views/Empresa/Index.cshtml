@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="alert alert-primary" role="alert">
+    <strong> Mantenimiento de empresas </strong>
+</div>
+
+<hr />
+<input type="button" value="Agregar" class="btn btn-lg btn-primary" id="btnAgregarEmpresa" name="btnAgregarEmpresa" />
+<br />
+<br />
+<div class="alert alert-primary" role="alert">
+    <strong> Listado de empresas </strong>
+</div>
+<br />
+<div id="divListadoEmpresa">
+
+</div>
+
+
+<input type="hidden" id="hidIdEmpresa" value="-1" />
+<!-- Modal -->
+<div class="modal fade" id="modalNuevoRegistroEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="titulo">Registro de Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre de la empresa</label>
+                    <input type="text" class="form-control" id="txtNombreEmpresa" placeholder="Ingrese nombre de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: Doña Pepa</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Ruc de la empresa</label>
+                    <input type="text" class="form-control" id="txtRuc" placeholder="Ingrese numero de RUC">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 15915915</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha</label>
+                    <input class="form-control" id="txtFechaRegistro" type="text" value=@DateTime.Now.Date readonly>
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 10/10/10</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Direccion de la empresa</label>
+                    <input type="text" class="form-control" id="txtDireccion" placeholder="Ingrese la direccion de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: Av.Maleante</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rubro de la empresa</label>
+                    <input type="text" class="form-control" id="txtRubro" placeholder="Ingrese el rubro de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: Telo</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono de la empresa</label>
+                    <input type="text" maxlength="7" class="form-control" id="txtTelefono" placeholder="Ingrese el telefono de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 3567584</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Detalle de la empresa</label>
+                    <input type="text" class="form-control" id="txtDetalle" placeholder="Ingrese el detalle de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: Blababa</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Estado de la empresa</label>
+                    <select class="form-control" id="txtEstado" value="0" placeholder="Ingrese el estado de la empresa" readonly>
+                        <option value="0">Pendiente</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                    </select>
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: 0</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Clave de la empresa</label>
+                    <input type="password" class="form-control" id="txtClave" placeholder="Ingrese la clave de la empresa">
+                    <small id="textoAyuda" class="form-text text-muted">Ejm: *****</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnGrabarNuevoEmpresa">Grabar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //********************************CARGAR***********************************************
+    CargarListadoEmpresa();
+    function CargarListadoEmpresa() {
+
+        $.ajax({
+            type: "POST",
+            url: URL_PAGE + "Administrador/Empresa/Listado",
+            cache: false,
+            data: {
+
+            },
+
+            success: function (data) {
+                if (data != null) {
+                    $("#divListadoEmpresa").html(data);
+                }
+                else {
+                    alert("Hubo un inconveniente en la operación.");
+
+                }
+            }
+        });
+        //alert("aaaa");
+    }
+    $("#txtRuc")
+    .keypress(function (event) {
+        if (event.which < 48 || event.which > 57 || this.value.length === 10) {
+          return false;
+      }
+    });
+    $("#txtTelefono")
+    .keypress(function (event) {
+        if (event.which < 48 || event.which > 57 || this.value.length === 7) {
+            return false;
+        }
+    });
+
+    $("#btnAgregarEmpresa").click(function () {
+        $("#txtNombreEmpresa").val("");
+        $("#txtRuc").val("");
+        $("#txtFechaRegistro").val();
+        $("#txtDireccion").val("");
+        $("#txtRubro").val("");
+        $("#txtTelefono").val("");
+        $("#txtDetalle").val("");
+        $("#txtEstado").val(0);
+        $("#txtClave").val("");
+        $("#hidIdEmpresa").val(-1);
+        $("#modalNuevoRegistroEmpresa").modal();
+    });
+
+
+    //********************************GRABAR&ACTUALIZAR***********************************************
+    $("#btnGrabarNuevoEmpresa").click(function () {
+
+        //Se obtiene los valores del formulario
+        var vNombre = $("#txtNombreEmpresa").val();
+        var vRuc = $("#txtRuc").val();
+        var vFechaRegistro = $("#txtFechaRegistro").val();
+        var vDireccion = $("#txtDireccion").val();
+        var vRubro = $("#txtRubro").val();
+        var vTelefono = $("#txtTelefono").val();
+        var vDetalle = $("#txtDetalle").val();
+        var vEstado = $("#txtEstado").val();
+        var vClave = $("#txtClave").val();
+        var vIdEmpresa = $("#hidIdEmpresa").val();
+
+
+        $.ajax({
+
+            type: "POST",
+            url: URL_PAGE + "Administrador/Empresa/Grabar",
+            cache: false,
+            data: {
+
+                codigo: vIdEmpresa,
+                nombre: vNombre,
+                ruc: vRuc,
+                fecha_registro: vFechaRegistro,
+                direccion: vDireccion,
+                rubro: vRubro,
+                telefono: vTelefono,
+                detalle: vDetalle,
+                estado: vEstado,
+                clave: vClave
+
+            },
+
+            success: function (data) {
+
+                if (data.success) {
+                    alert("Se registro exitosamente");
+                    CargarListadoEmpresa();
+                    $("#modalNuevoRegistroEmpresa").modal("toggle");
+                    $("#hidIdEmpresa").val(-1);
+
+                } else {
+                    alert("Ocurrió un error en el registro");
+                }
+
+            }
+        });
+
+    });
+
+</script>
